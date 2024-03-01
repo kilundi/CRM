@@ -1,0 +1,46 @@
+{% extends 'leads/base.html' %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
+
+{% endblock %}
+
+
+{% block title %}Create Lead {% endblock %}
+
+{% block content %}
+<!-- <div class="bg-cover bg-no-repeat bg-center p-16 flex flex-col items-center justify-center"
+    style="background-image: url('{% static bg_image %}')"> -->
+
+<div class="flex flex-col items-center justify-center p-16 bg-green-500 w-full max-h-full">
+    <a href="{% url 'lead_list' %}">Go back to leads</a>
+
+
+
+    <div class="flex flex-col items-center justify-center max-h-full dark w-full">
+        <div class="w-full max-w-md bg-formColor rounded-lg p-6 shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+            <h2 class="text-2xl font-bold text-gray-200 mb-4 text-center">Create Lead</h2>
+            <form class="flex flex-col text-black gap-3 shadow-[inset_-12px_-8px_40px_#46464620]" method="post">
+                {% csrf_token %}
+
+                <span class="font-bold text-slate-300">First Name</span>
+                {{ form.first_name }}
+
+                <span class="font-bold text-slate-300">Last Name</span>
+                {{ form.last_name }}
+
+                <span class="font-bold text-slate-300 ">Age</span>
+                {{ form.age }}
+
+                <span class="font-bold text-slate-300">Agent</span>
+                {{ form.agent }}
+
+                <button class="text-xl font-bold text-white" type="submit">Create</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

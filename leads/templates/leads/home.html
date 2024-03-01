@@ -1,0 +1,21 @@
+{% extends 'leads/base.html' %}
+
+{% load static %}
+
+{% block css %}
+
+
+{% endblock %}
+
+
+{% block title %}Lead_Details {% endblock %}
+
+{% block content %}
+<a href="{% url 'lead_list' %}">Go back to leads</a>
+<div class="flex flex-wrap gap-4 justify-center items-center">
+    <h1 class="text-4xl">This is the home page</h1>
+</div>
+
+<a href="{% url 'lead_create' %}">Create a new lead</a>
+
+{% endblock %}

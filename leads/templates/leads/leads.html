@@ -1,0 +1,37 @@
+{% extends 'leads/base.html' %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
+
+{% endblock %}
+
+
+{% block title %}Leads {% endblock %}
+
+{% block content %}
+
+<div class="bg-lime-600 h-4/5 w-full">
+
+
+    <a href="{% url 'lead_create' %}">Create a new lead</a>
+
+    <div class="flex flex-wrap gap-4 justify-center items-center">
+        {% for lead in lead_list %}
+        <div class="card">
+            <div class="card-border-top">
+            </div>
+            <div class="img">
+            </div>
+            <span>{{ lead.first_name }} {{ lead.last_name }}</span>
+            <p class="job"> Agent: {{lead.agent }} </p>
+
+            <a href="/{{lead.pk}}"><button> Click
+                </button></a>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

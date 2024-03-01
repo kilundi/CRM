@@ -1,0 +1,28 @@
+{% extends 'leads/base.html' %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
+
+{% endblock %}
+
+
+{% block title %}Lead_Details {% endblock %}
+
+{% block content %}
+<div>
+
+
+    <a href="{% url 'lead_list' %}">Go back to leads</a>
+    <div class="flex flex-wrap gap-4 justify-center items-center">
+        This is the details of {{ lead.first_name }} {{ lead.last_name }}
+    </div>
+    <a href="/{{lead.pk}}/lead_update" class="block py-2 px-4 text-sm hover:bg-gray-200">Update</a>
+
+    <hr>
+    <a href="/{{lead.pk}}/lead_delete" class="block py-2 px-4 text-sm hover:bg-gray-200">delete</a>
+
+    <a href="{% url 'lead_create' %}">Create a new lead</a>
+</div>
+{% endblock %}

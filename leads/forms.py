@@ -1,0 +1,26 @@
+from django import forms
+from .models import Lead
+
+class LeadModelForm(forms.ModelForm):
+    class Meta:
+        model = Lead
+        fields = (
+            'first_name',
+            'last_name',
+            'age',
+            'agent',
+        )
+
+        widgets = {
+                'first_name': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+                'last_name': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+                'age': forms.NumberInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+                'agent': forms.Select(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+            }
+
+
+
+class LeadForm(forms.Form):
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+    age = forms.IntegerField(min_value=18)
