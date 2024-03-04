@@ -51,7 +51,7 @@
             <span>{{ lead.first_name }} {{ lead.last_name }}</span>
             <p class="job"> Agent: {{lead.agent }} </p>
 
-            <a href="  {% url 'leads:lead_detail' lead.pk %} "><button> Details
+            <a href="  {% url 'leads:assign_agent' lead.pk %} "><button> Assign an Agent
                 </button></a>
 
         </div>

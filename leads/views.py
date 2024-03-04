@@ -1,10 +1,11 @@
+from typing import Any
 from django.shortcuts import render,redirect
-from .models import Lead
+from .models import Lead, Category
 from django.contrib.auth.mixins import LoginRequiredMixin
 from agents.mixins import OrganizorAndLoginRequiredMixin
 
-from .forms import LeadModelForm,CustomUserCreationForm, LeadForm
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView
+from .forms import LeadModelForm,CustomUserCreationForm, LeadForm, AssignAgentForm
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView, FormView
 
 # Create your views here.
 class LandingPageView(TemplateView):
@@ -144,7 +145,52 @@ class LogoutPageView(LoginRequiredMixin, TemplateView):
     template_name = 'registration/logout.html'
 
 
+class AssignAgentView(OrganizorAndLoginRequiredMixin, FormView):
+    template_name = 'leads/assign_agent.html'
+    form_class = AssignAgentForm
 
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super(AssignAgentView, self).get_form_kwargs(**kwargs)
+        kwargs.update( {
+            "request": self.request
+        })
+        return kwargs
+    success_url = '/lead_list/'
+
+    def form_valid(self, form):
+        agent= form.cleaned_data["agent"]
+        lead = Lead.objects.get(id = self.kwargs['pk'])
+        lead.agent = agent
+        lead.save()
+        return super(AssignAgentView, self).form_valid(form)
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    template_name = "leads/category_list.html"
+    context_object_name = 'category_lists'
+
+    def get_context_data(self,**kwargs):
+        context = super(CategoryListView, self).get_context_data(**kwargs)
+
+        user = self.request.user
+
+        if user.is_organizor:
+            queryset = Lead.objects.filter(organization = user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organization = user.agent.organization)
+
+        context.update({
+            "unassigned_lead_count": queryset.filter(category__isnull=True).count(),
+        })
+
+        return context
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organizor:
+            queryset = Category.objects.filter(organization = user.userprofile)
+        else:
+            queryset = Category.objects.filter(organization = user.agent.organization)
+        return queryset
 # def logout(request):
 #     return render(request, 'registration/logout.html')
 
