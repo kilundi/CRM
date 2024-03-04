@@ -1,0 +1,28 @@
+{% extends 'leads/base.html' %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
+
+{% endblock %}
+
+
+{% block title %}Agent_Details {% endblock %}
+
+{% block content %}
+<div>
+
+
+    <a href="{% url 'agents:agents_list' %}">Go back to agents</a>
+    <div class="flex flex-wrap gap-4 justify-center items-center">
+        This is the details of {{ agent.user}}
+    </div>
+    <a href="{% url 'agents:agent_update' agent.pk %} " class="block py-2 px-4 text-sm hover:bg-gray-200">Update</a>
+
+    <hr>
+    <a href=" {% url 'agents:agent_delete' agent.pk %}" class="block py-2 px-4 text-sm hover:bg-gray-200">delete</a>
+
+    <a href="{% url 'agents:create_agent' %}">Create a new Agent</a>
+</div>
+{% endblock %}

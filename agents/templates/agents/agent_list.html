@@ -8,26 +8,26 @@
 {% endblock %}
 
 
-{% block title %}Leads {% endblock %}
+{% block title %}Agents {% endblock %}
 
 {% block content %}
 
 <div class="bg-lime-600 h-4/5 w-full">
 
-    {% if request.user.is_organizor %}
-    <a href="{% url 'leads:lead_create' %}">Create a new lead</a>
-    {% endif %}
+
+    <a href="{% url 'agents:create_agent' %}">Create a new Agent</a>
+
     <div class="flex flex-wrap gap-4 justify-center items-center">
-        {% for lead in lead_list %}
+        {% for agent in agents %}
         <div class="card">
             <div class="card-border-top">
             </div>
             <div class="img">
             </div>
-            <span>{{ lead.first_name }} {{ lead.last_name }}</span>
-            <p class="job"> Agent: {{lead.agent }} </p>
+            <span>{{ agent.user.first_name }} {{ agent.user.last_name }}</span>
+            <p class="job"> Username: {{agent.user.username }} </p>
 
-            <a href="  {% url 'leads:lead_detail' lead.pk %} "><button> Details
+            <a href="{% url 'agents:agent_details' agent.pk %}"><button> Details
                 </button></a>
 
         </div>
