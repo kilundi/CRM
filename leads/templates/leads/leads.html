@@ -16,6 +16,7 @@
 
     {% if request.user.is_organizor %}
     <a href="{% url 'leads:lead_create' %}">Create a new lead</a>
+    <h1>Assigned leads</h1>
     {% endif %}
     <div class="flex flex-wrap gap-4 justify-center items-center">
         {% for lead in lead_list %}
@@ -32,6 +33,31 @@
 
         </div>
         {% endfor %}
+
+
+    </div>
+    {% if request.user.is_organizor %}
+    <h1>Unassigned leads</h1>
+    {% endif %}
+    <div class="flex flex-wrap gap-4 justify-center items-center">
+        {% if unassigned_leads.exists %}
+
+        {% for lead in unassigned_leads %}
+        <div class="card">
+            <div class="card-border-top">
+            </div>
+            <div class="img">
+            </div>
+            <span>{{ lead.first_name }} {{ lead.last_name }}</span>
+            <p class="job"> Agent: {{lead.agent }} </p>
+
+            <a href="  {% url 'leads:lead_detail' lead.pk %} "><button> Details
+                </button></a>
+
+        </div>
+        {% endfor %}
+
+        {% endif %}
     </div>
 </div>
 {% endblock %}
