@@ -1,10 +1,12 @@
-from typing import Any
+from django.urls import reverse
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.shortcuts import render,redirect
 from .models import Lead, Category
 from django.contrib.auth.mixins import LoginRequiredMixin
 from agents.mixins import OrganizorAndLoginRequiredMixin
 
-from .forms import LeadModelForm,CustomUserCreationForm, LeadForm, AssignAgentForm
+from .forms import LeadModelForm,CustomUserCreationForm, LeadForm, AssignAgentForm, LeadCategoryUpdateForm
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView, FormView
 
 # Create your views here.
@@ -191,6 +193,49 @@ class CategoryListView(LoginRequiredMixin, ListView):
         else:
             queryset = Category.objects.filter(organization = user.agent.organization)
         return queryset
+
+class CategoryDetailView(LoginRequiredMixin, DetailView):
+    template_name = "leads/category_detail.html"
+    context_object_name = 'category'
+
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(CategoryDetailView, self).get_context_data(**kwargs)
+    #     leads = self.get_object().leads.all()
+    #     context.update({
+    #         "leads": leads
+    #     })
+
+    #     return context
+
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organizor:
+            queryset = Category.objects.filter(organization = user.userprofile)
+        else:
+            queryset = Category.objects.filter(organization = user.agent.organization)
+        return queryset
+
+class LeadCategoryUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'leads/lead_category_update.html'
+    form_class = LeadCategoryUpdateForm
+
+
+    def get_success_url(self) -> str:
+        return reverse("leads:lead_detail", kwargs={"pk": self.get_object().id})
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organizor:
+            queryset = Lead.objects.filter(organization = user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organization = user.agent.organization)
+            #filter for the agent that is logged in
+            queryset = queryset.filter(agent__user = user)
+        return queryset
+
+
 # def logout(request):
 #     return render(request, 'registration/logout.html')
 

@@ -16,6 +16,7 @@
 
     {% if request.user.is_organizor %}
     <a href="{% url 'leads:lead_create' %}">Create a new lead</a>
+    <a href="{% url 'leads:category_list' %}">View Categories</a>
     <h1>Assigned leads</h1>
     {% endif %}
     <div class="flex flex-wrap gap-4 justify-center items-center">

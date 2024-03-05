@@ -19,6 +19,9 @@
         This is the details of {{ lead.first_name }} {{ lead.last_name }}
     </div>
     <a href=" {% url 'leads:lead_update' lead.pk %} " class="block py-2 px-4 text-sm hover:bg-gray-200">Update</a>
+    <hr>
+    <a href=" {% url 'leads:lead_category_update' lead.pk %} "
+        class="block py-2 px-4 text-sm hover:bg-gray-200">Category</a>
 
     <hr>
     <a href="  {% url 'leads:lead_delete' lead.pk %}" class="block py-2 px-4 text-sm hover:bg-gray-200">delete</a>
