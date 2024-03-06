@@ -1,4 +1,6 @@
 {% extends 'leads/base.html' %}
+{% load tailwind_filters %}
+
 
 {% load static %}
 
@@ -26,7 +28,7 @@
             <form class="flex flex-col text-black gap-3 shadow-[inset_-12px_-8px_40px_#46464620]" method="post">
                 {% csrf_token %}
 
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button class="text-xl font-bold text-white" type="submit">Update</button>
             </form>
 

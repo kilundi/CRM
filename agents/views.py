@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.urls import reverse
+from django.contrib import messages
+
 import random
 from django.views import generic
 from django.core.mail import send_mail
@@ -20,7 +23,9 @@ class AgentListView( OrganizorAndLoginRequiredMixin, generic.ListView):
 class AgentCreateView( OrganizorAndLoginRequiredMixin, generic.CreateView):
     template_name = 'agents/agent_create.html'
     form_class = AgentModelForm
-    success_url = '/agents_list/'
+
+    def get_success_url(self):
+        return reverse("agents:agents_list")
 
     def form_valid(self, form):
         user =form.save(commit=False)
@@ -63,7 +68,11 @@ class AgentUpdateView( OrganizorAndLoginRequiredMixin, generic.UpdateView ):
 
 
     def get_queryset(self):
-        return Agent.objects.all()
+        organization = self.request.user.userprofile
+        return Agent.objects.filter(organization = organization)
+
+
+
 
 
 class AgentDeleteView(OrganizorAndLoginRequiredMixin, generic.DeleteView):

@@ -1,5 +1,7 @@
 {% extends 'leads/base.html' %}
 
+{% load tailwind_filters %}
+
 {% load static %}
 
 {% block css %}
@@ -15,15 +17,18 @@
 <div class="flex flex-col items-center justify-center p-16 bg-green-500 w-full max-h-full">
 
 
-    <div class="flex gap-4 justify-center items-center">
-
-        <div>
+    <div class="flex flex-col items-center justify-center max-h-full dark w-full">
+        <div class="w-full max-w-md bg-formColor rounded-lg p-6 shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
             <form method="post">
                 {% csrf_token %}
-                {{form.as_p}}
+                {{ form|crispy }}
                 <button class="text-xl font-bold text-white" type="submit">Login</button>
-                <a href="{% url 'reset-password' %}">Forgot Password?</a>
+
             </form>
+
+            <div>
+                <a href="{% url 'reset-password' %}">Forgot Password?</a>
+            </div>
         </div>
 
     </div>

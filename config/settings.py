@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'widget_tweaks',
     'agents',
+
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -147,9 +150,14 @@ AUTH_USER_MODEL = 'leads.User'
 LOGIN_REDIRECT_URL = '/lead_list'
 LOGIN_URL = '/login'
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = 'your-smtp-host'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'your-email@example.com'
 # EMAIL_HOST_PASSWORD = 'your-email-password'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"

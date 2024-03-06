@@ -83,6 +83,11 @@ class LeadCreateView(OrganizorAndLoginRequiredMixin, CreateView):
     template_name = 'leads/lead_create.html'
     form_class = LeadModelForm
     success_url = '/lead_list/'
+
+
+    def form_valid(self, form):
+        form.instance.organization = self.request.user.userprofile
+        return super().form_valid(form)
 # def lead_create(request):
 #     form = LeadModelForm()
 #     if request.method == 'POST':

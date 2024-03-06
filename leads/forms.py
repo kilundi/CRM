@@ -14,12 +14,12 @@ class LeadModelForm(forms.ModelForm):
             'agent',
         )
 
-        widgets = {
-                'first_name': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-                'last_name': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-                'age': forms.NumberInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-                'agent': forms.Select(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-            }
+        # widgets = {
+        #         'first_name': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+        #         'last_name': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+        #         'age': forms.NumberInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+        #         'agent': forms.Select(attrs={'class': 'bg-slate-500 text-black border-0 rounded-md p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+            # }
 
 
 
@@ -35,12 +35,12 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
 
 
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-            'email': forms.EmailInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-            'password1': forms.PasswordInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-            'password2': forms.PasswordInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
-        }
+        # widgets = {
+        #     'username': forms.TextInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+        #     'email': forms.EmailInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+        #     'password1': forms.PasswordInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+        #     'password2': forms.PasswordInput(attrs={'class': 'bg-slate-500 text-black border-0 rounded-xl p-2 w-full focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150'}),
+        # }
 
 
 class AssignAgentForm(forms.Form):

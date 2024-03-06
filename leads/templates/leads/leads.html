@@ -20,6 +20,7 @@
     <h1>Assigned leads</h1>
     {% endif %}
     <div class="flex flex-wrap gap-4 justify-center items-center">
+        {% if lead_list %}
         {% for lead in lead_list %}
         <div class="card">
             <div class="card-border-top">
@@ -34,6 +35,15 @@
 
         </div>
         {% endfor %}
+
+        {% else %}
+
+        {% if request.user.is_organizor %}
+        <p> No leads available <a href="{% url 'leads:lead_create' %}">Create a new lead</a></p>
+        {% else %}
+        <p>No leads available contact your admin. </p>
+        {% endif %}
+        {% endif %}
 
 
     </div>

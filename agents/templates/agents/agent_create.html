@@ -1,5 +1,7 @@
 {% extends 'leads/base.html' %}
 
+{% load tailwind_filters %}
+
 {% load static %}
 
 {% block css %}
@@ -25,7 +27,7 @@
             <form class="flex flex-col text-black gap-3 shadow-[inset_-12px_-8px_40px_#46464620]" method="post">
                 {% csrf_token %}
 
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <!--
                 <span class="font-bold text-slate-300">First Name</span>
                 {{ form.first_name }}
