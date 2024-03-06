@@ -1,6 +1,6 @@
 <header class="text-gray-700 body-font">
-    <nav class="bg-gray-100">
-        <div class="max-w-6xl mx-auto px-4">
+    <nav class="bg-gray-100 absolute top-0 left-0 right-0">
+        <div class="max-w-6xl mx-auto px-4  shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
             <div class="flex justify-between">
 
                 <div class="flex space-x-4">
@@ -37,9 +37,14 @@
                 {% if request.user.is_authenticated %}
 
                 <div class="hidden md:flex items-center space-x-1 gap-4">
-                    Hi {{ request.user.username }} !
+                    {% if request.user.is_organizor %}
+                    Logged as {{ request.user.username }} organization !
+                    {% else %}
+                    Hi Agent {{ request.user.username }} !
+                    {% endif %}
 
-                    <div>
+                    <div
+                        class="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300">
                         <form method="post" action="{% url 'logged_out' %}">
                             {% csrf_token %}
 
