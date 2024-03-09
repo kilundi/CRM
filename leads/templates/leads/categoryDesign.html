@@ -1,0 +1,35 @@
+<!-- //////// -->
+{% if lead.category.name == "Unconverted" %}
+<!-- //////// -->
+
+
+
+<a href="{% url 'leads:category_list' %}"> <span
+        class="bg-blue-600 p-1 px-2 rounded-md text-white font-bold">{{lead.category.name }}</span></a>
+
+
+
+<!-- //////// -->
+{% elif lead.category.name == "Converted" %}
+<!-- //////// -->
+
+<a href="{% url 'leads:category_list' %}"> <span
+        class="bg-green-600 p-1 px-2 rounded-md text-white font-bold">{{lead.category.name }}</span></a>
+
+<!-- //////// -->
+{% elif lead.category.name == "Contacted" %}
+<!-- //////// -->
+
+<a href="{% url 'leads:category_list' %}"> <span
+        class="bg-purple-600 p-1 px-2 rounded-md text-white font-bold">{{lead.category.name }}</span></a>
+
+<!-- //////// -->
+{% else %}
+<!-- //////// -->
+
+<a href="{% url 'leads:category_list' %}"> <span
+        class="bg-red-600 p-1 px-2 rounded-md text-white font-bold">Unassigned</span></a>
+
+<!-- //////// -->
+{% endif %}
+<!-- //////// -->

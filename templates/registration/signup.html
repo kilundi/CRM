@@ -17,9 +17,9 @@
 
 
 
-<div class="flex items-center justify-center dark">
-    <div class="w-full p-7 max-w-md rounded-lg shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
-        <form method="post">
+<div class="flex items-center justify-center dark shadow-[inset_-12px_-8px_40px_#46464620] rounded-xl ">
+    <div class="w-full p-7 max-w-md rounded-lg">
+        <form id="signup-form" method="post">
             {% csrf_token %}
             {{ form|crispy }}
 

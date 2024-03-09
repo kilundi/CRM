@@ -1,7 +1,7 @@
 {% load static tailwind_tags %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth focus:scroll-auto ">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,15 +19,15 @@
 
     <title>{% block title %} {% endblock %} | CRM </title>
 </head>
-<body class="">
+<body class="bg-DARK_THEME-PRIMARY font-body dark:bg-DARK_THEME-SECONDARY dark:text-LIGHT_MODE">
     <section
-        class="max-w-6xl mx-auto border-gray-500 border-r border-l border-opacity-50 min-h-screen shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] ">
+        class="max-w-6xl mx-auto border-gray-500 border-r border-l border-opacity-50 min-h-screen bg-animated-bg shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] ">
         {% block header %}
         {% include 'navbar.html' %}
         {% endblock %}
 
-        <section
-            class=" max-w-6xl mx-auto px-4 pt-20 flex justify-center items-center shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] pb-4 ">
+
+        <section class=" max-w-6xl mx-auto pt-20 flex justify-center items-center pb-12 min-h-[720px]  ">
 
             {% block content %}
 
@@ -39,6 +39,11 @@
         {% include 'footer.html' %}
         {% endblock %}
     </section>
+
+    {% block js %}
+
+    {% endblock %}
+
     <script src="{% static 'js/navbar.js' %}"></script>
 </body>
 </html>

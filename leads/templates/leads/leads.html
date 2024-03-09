@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
 
 {% endblock %}
 
@@ -12,70 +11,151 @@
 
 {% block content %}
 
-<div class="bg-lime-600 h-4/5 w-full">
+<div class=" w-full min-h-96 flex flex-col justify-center items-center">
+    <div class="w-full text-center">
+        <h1 class="text-4xl font-header">Leads</h1>
+    </div>
 
+    {% if lead_list or unassigned_leads.exists %}
     {% if request.user.is_organizor %}
-    <a href="{% url 'leads:lead_create' %}">Create a new lead</a>
+    <div class="flex justify-around items-center p-4 mb-3 flex-wrap gap-4 bg-slate-300 w-full bg-opacity-60">
+        <a href="{% url 'leads:lead_create' %}">Create a new lead</a>
 
-    <a href="{% url 'leads:category_list' %}">View Categories</a>
 
-
-    {% if lead_list %}
-    <h1>Assigned leads</h1>
+        <a href="{% url 'leads:category_list' %}">View Categories</a>
+    </div>
     {% endif %}
     {% endif %}
-    <div class="flex flex-wrap gap-4 justify-center items-center">
-        {% if lead_list %}
-        {% for lead in lead_list %}
-        <div class="card">
-            <div class="card-border-top">
-            </div>
-            <div class="img">
-            </div>
-            <span>{{ lead.first_name }} {{ lead.last_name }}</span>
-            <p class="job"> Agent: {{lead.agent }} </p>
 
-            <a href="  {% url 'leads:lead_detail' lead.pk %} "><button> Details
-                </button></a>
-
-        </div>
-        {% endfor %}
-
-        {% else %}
-
+    <div class="w-full">
         {% if request.user.is_organizor %}
-        <p> No leads available <a href="{% url 'leads:lead_create' %}">Create a new lead</a></p>
-        {% else %}
-        <p>No leads available contact your admin. </p>
+        {% if lead_list %}
+
+        <div class="mb-2 flex justify-center items-center md:justify-start px-6">
+            <h1 class="text-2xl w-fit">Assigned leads</h1>
+        </div>
+
         {% endif %}
+
         {% endif %}
 
+        <div class="mb-6 w-full">
 
-    </div>
-    {% if request.user.is_organizor %}
-    {% if lead_list %}
-    <h1>Unassigned leads</h1>
-    {% endif %}
-    {% endif %}
-    <div class="flex flex-wrap gap-4 justify-center items-center">
-        {% if unassigned_leads.exists %}
+            {% if lead_list %}
+            <div class="block w-full overflow-x-auto shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] rounded-xl">
+                <table class="items-center min-w-full border border-gray-300 ">
+                    {% include 'leads/tableHead.html' %}
 
-        {% for lead in unassigned_leads %}
-        <div class="card">
-            <div class="card-border-top">
+                    {% for lead in lead_list %}
+                    <tbody>
+                        <tr class=" bg-opacity-50 {% cycle 'bg-slate-300' 'bg-white' %} ">
+                            <th
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
+                                {{ lead.first_name }}
+                            </th>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                                {{ lead.last_name }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {{lead.agent }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {% include 'leads/categoryDesign.html' %}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {% include 'leads/detailsUrl.html' %}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    {% endfor %}
+                </table>
             </div>
-            <div class="img">
-            </div>
-            <span>{{ lead.first_name }} {{ lead.last_name }}</span>
-            <p class="job"> Agent: {{lead.agent }} </p>
 
-            <a href="  {% url 'leads:assign_agent' lead.pk %} "><button> Assign an Agent
-                </button></a>
+
+
+            {% else %}
+
+            {% if not unassigned_leads.exists %}
+            <div class="flex justify-center items-center min-h-[300px]">
+                {% if request.user.is_organizor %}
+                <p> No leads available <a href="{% url 'leads:lead_create' %}" class="underline text-blue-600">Create a
+                        new
+                        lead</a></p>
+                {% else %}
+                <p>No leads available contact your admin. </p>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endif %}
 
         </div>
-        {% endfor %}
-
-        {% endif %}
     </div>
+
+    <div class="w-full">
+        {% if request.user.is_organizor %}
+        {% if unassigned_leads.exists %}
+        <div class="mb-2 flex justify-center items-center md:justify-start px-6">
+            <h1 class="text-2xl w-fit">Unassigned leads</h1>
+        </div>
+        {% endif %}
+
+
+        <div>
+
+            {% if unassigned_leads.exists %}
+            <div class="block w-full overflow-x-auto shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] rounded-xl">
+                <table class="items-center min-w-full border border-gray-300 ">
+                    {% include 'leads/tableHead.html' %}
+
+
+                    {% for lead in unassigned_leads %}
+                    <tbody>
+                        <tr class="{% cycle 'bg-slate-300' 'bg-white' %} bg-opacity-50">
+                            <th
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
+                                {{ lead.first_name }}
+                            </th>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                                {{ lead.last_name }}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                <a href="  {% url 'leads:assign_agent' lead.pk %} ">
+                                    <span
+                                        class="bg-red-600  p-1 px-2 rounded-md text-white hover:bg-red-300 hover:text-black font-bold">
+                                        Assign an Agent
+                                    </span>
+
+                                </a>
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {% include 'leads/categoryDesign.html' %}
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                {% include 'leads/detailsUrl.html' %}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    {% endfor %}
+
+
+                </table>
+            </div>
+            {% endif %}
+
+        </div>
+        {% endif %}
+
+    </div>
+
 </div>
 {% endblock %}

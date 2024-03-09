@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
+
 
 {% endblock %}
 
@@ -12,22 +12,23 @@
 
 {% block content %}
 
-<section class="text-white body-font">
-    <div class="container px-5 py-24 mx-auto">
+<section class=" body-font w-full min-h-96 ">
+    <div class="container px-5  mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
             <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">{{ category.name }}</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Leads under this category</p>
         </div>
-        <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-            <table class="table-auto w-full text-left whitespace-no-wrap">
+        <div class="lg:w-2/3 w-full mx-auto overflow-auto shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] rounded-xl">
+            <table class="table-auto w-full text-left whitespace-no-wrap border border-gray-300">
                 <thead>
                     <tr>
-                        <th
-                            class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                        <th class="px-4 py-3 title-font tracking-wider text-sm  rounded-tl rounded-bl">
                             First Name</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                        <th class="px-4 py-3 title-font tracking-wider text-sm ">
                             Last Name</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                        <th class="px-4 py-3 title-font tracking-wider text-sm ">
+                            Update Category</th>
+                        <th class="px-4 py-3 title-font tracking-wider text-sm ">
                             View Lead</th>
 
                     </tr>
@@ -36,12 +37,16 @@
 
                     {% for lead in category.leads.all %}
 
-                    <tr>
+                    <tr class="{% cycle 'bg-slate-300' 'bg-white' %}">
 
                         <td class="px-4 py-3"> <a href="{% url 'leads:lead_detail' lead.pk %}"> {{ lead.first_name }}
                             </a> </td>
 
                         <td class="px-4 py-3"> <a href="{% url 'leads:lead_detail' lead.pk %}"> {{ lead.last_name }}
+                            </a> </td>
+
+                        <td class="px-4 py-3"> <a href=" {% url 'leads:lead_category_update' lead.pk %}"> Update
+                                category
                             </a> </td>
 
                         <td class="px-4 py-3"> <a href="{% url 'leads:lead_detail' lead.pk %}"> View lead details
