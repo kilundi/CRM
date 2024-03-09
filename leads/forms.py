@@ -12,6 +12,10 @@ class LeadModelForm(forms.ModelForm):
             'last_name',
             'age',
             'agent',
+            'description',
+            # 'date_added',
+            'phone_number',
+            'email',
         )
 
         # widgets = {

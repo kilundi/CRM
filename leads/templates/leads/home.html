@@ -3,7 +3,18 @@
 {% load static %}
 
 {% block css %}
+<!-- *******  Link To Custom CSS Style Sheet  ******* -->
 
+<link rel="stylesheet" type="text/css" href="{% static 'css/testimonials.css' %}">
+
+<!-- *******  Font Awesome Icons Link  ******* -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+<!-- *******  Owl Carousel Links  ******* -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
 {% endblock %}
 
@@ -11,11 +22,147 @@
 {% block title %}Home {% endblock %}
 
 {% block content %}
-<!-- <a href="{% url 'leads:lead_list' %}">Go back to leads</a> -->
-<div class="flex flex-wrap gap-4 justify-center items-center">
-    <h1 class="text-4xl">This is the home page</h1>
+<div class="w-full">
+
+    <div class="w-full rounded-t-xl bg-cover bg-center bg-custom-image h-96 bg-opacity-20">
+
+        <h1 class="text-4xl">This is the home page</h1>
+    </div>
+
+    <div class="w-full min-h-96 flex flex-col justify-around items-center gap-3 pt-4 pb-4">
+        <div class="flex flex-col justify-center items-center gap-3">
+            <h1 class="text-4xl font-header">Our Process</h1>
+
+            <hr class="w-20 h-1 bg-green-400">
+
+        </div>
+
+
+        <div class="flex justify-around gap-4 items-center flex-wrap w-full">
+
+            <div class="flex flex-col gap-3 justify-center items-center text-center w-72">
+                <h1 class="text-4xl font-bold font-italic">1</h1>
+                <h2 class="text-xl font-bold font-italic">
+                    Analysis
+                </h2>
+                <div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus dicta perspiciatis
+                </div>
+
+            </div>
+            <div class="flex flex-col gap-3 justify-center items-center w-72 text-center">
+                <h1 class="text-4xl font-bold font-italic">2</h1>
+                <h2 class="text-xl font-bold font-italic">
+                    Execution
+                </h2>
+                <div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus dicta perspiciatis
+                </div>
+
+            </div>
+            <div class="flex flex-col gap-3 justify-center items-center w-72 text-center">
+                <h1 class="text-4xl font-bold font-italic">3</h1>
+                <h2 class="text-xl font-bold font-italic">
+                    Success
+                </h2>
+                <div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus dicta perspiciatis
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div
+        class="w-full min-h-96 flex flex-col md:flex-row justify-around items-center gap-4 mb-10 bg-cyan-300 bg-opacity-20">
+
+        <div class="max-w-[500px]">
+            <img src="{% static 'images/about-us.png' %}" alt="about us" class="w-full h-full object-cover">
+        </div>
+
+        <div class=" max-w-[800px] md:max-w-[600px] w-full flex flex-col gap-3  ">
+            <div class="flex justify-center items-center md:justify-start">
+                <div class="flex flex-col justify-center items-center w-fit gap-4">
+                    <h1 class="text-4xl font-header">About us</h1>
+                    <hr class="w-20 h-1 bg-green-400">
+                </div>
+            </div>
+
+            <div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate maxime ab molestiae error fugit
+                    sed enim accusantium fuga eveniet sunt modi, aspernatur
+                </p>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, laboriosam doloribus libero
+                    voluptatibus,
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="w-full min-h-96 flex flex-col gap-4">
+        <div class="w-full flex flex-col justify-center items-center">
+            <div class="flex flex-col justify-center items-center gap-4">
+                <h1 class="text-4xl font-header">Services we offer</h1>
+                <hr class="w-20 h-1 bg-green-400">
+            </div>
+        </div>
+        <div class="flex gap-4 flex-col-reverse md:flex-row justify-center items-center">
+
+            <div class=" max-w-[800px] md:max-w-[600px] w-full flex flex-col gap-3 ">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime saepe reiciendis necessitatibus
+                    velit laboriosam similique
+                </p>
+
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur iure reiciendis aperiam harum
+                    quia similique debitis aliquam! Minus soluta praesentium iusto recusandae blanditiis
+                </p>
+            </div>
+
+            <div class="max-w-[450px]">
+                <img src="{% static 'images/services.png' %}" alt="service" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </div>
+
+    <!-- //////////////////////////////////// -->
+    <div class="">
+
+
+
+        <div class="w-full min-h-96  bg-custom-bg1 bg-no-repeat bg-cover">
+
+
+            {% include 'testimonial.html' %}
+
+
+        </div>
+
+        <!-- //////////////////////////////////// -->
+        <div class="w-full min-h-96 ">
+            {% include 'contactUsForm.html' %}
+        </div>
+    </div>
 </div>
 
-<!-- <a href="{% url 'leads:lead_create' %}">Create a new lead</a> -->
+
+
+{% endblock %}
+
+
+{% block js %}
+<!--   *****   JQuery Link   *****   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<!--   *****   Owl Carousel js Link  *****  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<!--   *****   Link To Custom Script File   *****   -->
+<script src="{% static 'js/testimonials.js' %}"></script>
 
 {% endblock %}

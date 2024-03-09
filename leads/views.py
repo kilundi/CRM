@@ -86,8 +86,12 @@ class LeadCreateView(OrganizorAndLoginRequiredMixin, CreateView):
 
 
     def form_valid(self, form):
-        form.instance.organization = self.request.user.userprofile
-        return super().form_valid(form)
+        # form.instance.organization = self.request.user.userprofile
+        lead = form.save( commit=False)
+        lead.organization = self.request.user.userprofile
+        lead.save()
+
+        return super(LeadCreateView, self).form_valid(form)
 # def lead_create(request):
 #     form = LeadModelForm()
 #     if request.method == 'POST':

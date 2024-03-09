@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
+
 
 {% endblock %}
 
@@ -12,24 +12,25 @@
 
 {% block content %}
 
-<section class="text-white body-font">
-    <div class="container px-5 py-24 mx-auto">
+<section class=" body-font w-full min-h-96 ">
+    <div class="container px-5 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
             <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Categories</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">These categories segment the leads</p>
         </div>
-        <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-            <table class="table-auto w-full text-left whitespace-no-wrap">
-                <thead>
+        <div class="max-w-[500px] w-full mx-auto overflow-auto shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] rounded-xl">
+            <table class="table-auto w-full text-left whitespace-no-wrap border border-gray-300">
+                <thead class="border-b-2">
                     <tr>
-                        <th
-                            class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                        <th class="px-4 py-3 title-font tracking-wider text-sm rounded-tl rounded-bl">
                             Name</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Lead Count</th>
+                        <th class="px-4 py-3 title-font tracking-wider  text-sm">
+                            Lead Count
+                        </th>
 
                     </tr>
                 </thead>
+
                 <tbody>
 
                     <tr>
@@ -39,7 +40,7 @@
                     </tr>
 
                     {% for category in category_lists %}
-                    <tr>
+                    <tr class="{% cycle 'bg-slate-300' 'bg-white' %}">
                         <td class="px-4 py-3">
                             <a href="{% url 'leads:category_detail' category.pk %}">{{ category.name }}</a>
                         </td>

@@ -11,18 +11,59 @@
 {% block title %}Agent_Details {% endblock %}
 
 {% block content %}
-<div>
+<div class="w-full mx-4 md:mx-0   ">
 
-
-    <a href="{% url 'agents:agents_list' %}">Go back to agents</a>
-    <div class="flex flex-wrap gap-4 justify-center items-center">
-        This is the details of {{ agent.user}}
+    <div class="text-center py-4 text-4xl w-full">
+        Agent Details
     </div>
-    <a href="{% url 'agents:agent_update' agent.pk %} " class="block py-2 px-4 text-sm hover:bg-gray-200">Update</a>
 
-    <hr>
-    <a href=" {% url 'agents:agent_delete' agent.pk %}" class="block py-2 px-4 text-sm hover:bg-gray-200">delete</a>
+    <div class="flex gap-4 justify-around items-center  ">
 
-    <a href="{% url 'agents:create_agent' %}">Create a new Agent</a>
+
+
+        <div class="max-w-[600px] w-full my-4">
+            <div class="flex justify-around items-center gap-4 bg-gray-400 px-4 rounded-t-xl font-bold">
+                <a href="{% url 'agents:agents_list' %} " class=" hover:underline hover:text-blue-700 ">Go back to
+                    agents</a>
+
+                <a href=" {% url 'agents:agent_update' agent.pk %} "
+                    class=" hover:underline hover:text-blue-700 block py-2 px-4 text-sm ">Update</a>
+                <hr>
+
+            </div>
+
+
+            <div class="flex flex-col gap-4 bg-gray-300 px-4 pb-4 rounded-b-xl ">
+
+                <hr>
+
+                <p> <span class="font-bold"> First Name: </span> {{ agent.user.first_name }}</p>
+                <hr>
+                <p><span class="font-bold"> Last Name: </span>{{ agent.user.last_name }}</p>
+
+
+                <hr>
+
+
+                <p><span class="font-bold">Username:</span> {{ agent.user.username }}</p>
+                <hr>
+
+                <p><span class="font-bold">Email:</span> {{ agent.user.email }}</p>
+                <hr>
+
+                <div class="bg-blue-600 w-fit px-4 py-2 rounded-xl">
+                    <a href="  {% url 'agents:agent_delete' agent.pk %}"
+                        class="text-SECONDARY1 font-extrabold uppercase py-2 px-4 text-sm ">delete</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="p-4 hidden md:block max-w-[500px]">
+            <img src="{% static 'images/detail.png' %}" alt="service" class="w-full h-full object-cover">
+
+        </div>
+    </div>
 </div>
 {% endblock %}

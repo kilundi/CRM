@@ -11,21 +11,92 @@
 {% block title %}Lead_Details {% endblock %}
 
 {% block content %}
-<div>
 
+<div class="w-full mx-4 md:mx-0   ">
 
-    <a href="{% url 'leads:lead_list' %}">Go back to leads</a>
-    <div class="flex flex-wrap gap-4 justify-center items-center">
-        This is the details of {{ lead.first_name }} {{ lead.last_name }}
+    <div class="text-center py-4 text-4xl w-full">
+        Lead Details
     </div>
-    <a href=" {% url 'leads:lead_update' lead.pk %} " class="block py-2 px-4 text-sm hover:bg-gray-200">Update</a>
-    <hr>
-    <a href=" {% url 'leads:lead_category_update' lead.pk %} "
-        class="block py-2 px-4 text-sm hover:bg-gray-200">Category</a>
 
-    <hr>
-    <a href="  {% url 'leads:lead_delete' lead.pk %}" class="block py-2 px-4 text-sm hover:bg-gray-200">delete</a>
+    <div class="flex gap-4 justify-around items-center  ">
 
-    <a href="{% url 'leads:lead_create' %}">Create a new lead</a>
+
+
+        <div class="max-w-[600px] w-full my-4">
+            <div class="flex justify-around items-center gap-4 bg-gray-400 px-4 rounded-t-xl font-bold">
+                <a href="{% url 'leads:lead_list' %} " class=" hover:underline hover:text-blue-700 ">Go back to
+                    leads</a>
+
+                {% if request.user.is_organizor %}
+                <a href=" {% url 'leads:lead_update' lead.pk %} "
+                    class=" hover:underline hover:text-blue-700 block py-2 px-4 text-sm ">Update</a>
+
+                {% endif %}
+
+                <hr>
+                <a href=" {% url 'leads:lead_category_update' lead.pk %} "
+                    class=" hover:underline hover:text-blue-700 block py-2 px-4 text-sm">Category
+                    update</a>
+
+                <hr>
+
+
+                <!-- <a href="{% url 'leads:lead_create' %}">Create a new lead</a> -->
+            </div>
+
+
+            <div class="flex flex-col gap-4 bg-gray-300 px-4 pb-4 rounded-b-xl ">
+
+                <hr>
+
+                <p> <span class="font-bold"> First Name: </span> {{ lead.first_name }}</p>
+                <hr>
+                <p><span class="font-bold"> Last Name: </span>{{ lead.last_name }}</p>
+
+
+                <hr>
+
+
+                <p><span class="font-bold">Email:</span> {{ lead.email }}</p>
+                <hr>
+                <p><span class="font-bold">Description:</span></p>
+                <div>
+                    {{ lead.description }}
+                </div>
+                <hr>
+
+                <p><span class="font-bold">Age:</span> {{ lead.age }}</p>
+                <hr>
+
+                <p><span class="font-bold">Agent:</span> {{ lead.agent }}</p>
+                <hr>
+                <p><span class="font-bold"> Phone:</span> {{ lead.phone_number }}</p>
+                <hr>
+
+
+                <p><span class="font-bold"> Date Added:</span> {{ lead.date_added }}</p>
+                <hr>
+                <p><span class="font-bold"> Category:</span> {{ lead.category }}</p>
+
+                {% if request.user.is_organizor %}
+                <hr>
+                <div class="bg-blue-600 w-fit px-4 py-2 rounded-xl">
+                    <a href="  {% url 'leads:lead_delete' lead.pk %}"
+                        class=" text-SECONDARY1 font-extrabold uppercase py-2 px-4 text-sm ">delete</a>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="p-4 hidden md:block max-w-[500px]">
+            <img src="{% static 'images/detail.png' %}" alt="service" class="w-full h-full object-cover">
+
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 {% endblock %}

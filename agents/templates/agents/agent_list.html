@@ -12,27 +12,68 @@
 {% block title %}Agents {% endblock %}
 
 {% block content %}
+<div class="flex flex-col gap-4 justify-center items-center w-full">
 
-<div class="bg-lime-600 h-4/5 w-full">
 
-
-    <a href="{% url 'agents:create_agent' %}">Create a new Agent</a>
-
-    <div class="flex flex-wrap gap-4 justify-center items-center">
-        {% for agent in agents %}
-        <div class="card">
-            <div class="card-border-top">
-            </div>
-            <div class="img">
-            </div>
-            <span>{{ agent.user.first_name }} {{ agent.user.last_name }}</span>
-            <p class="job"> Username: {{agent.user.username }} </p>
-
-            <a href="{% url 'agents:agent_details' agent.pk %}"><button> Details
-                </button></a>
-
-        </div>
-        {% endfor %}
+    <div class="w-full text-center">
+        <h1 class="text-4xl font-header">Agents</h1>
     </div>
+    {% if agents %}
+    <div class="block w-full overflow-x-auto shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] rounded-xl">
+
+        <table class="items-center min-w-full border border-gray-300 ">
+            <thead>
+                <tr>
+                    <th
+                        class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        FIRST NAME
+                    </th>
+                    <th
+                        class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        LAST NAME
+                    </th>
+                    <th
+                        class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        USERNAME
+                    </th>
+                    <th
+                        class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        DETAILS
+                    </th>
+                </tr>
+            </thead>
+
+            {% for agent in agents %}
+            <tbody>
+                <tr class=" bg-opacity-50 {% cycle 'bg-slate-300' 'bg-white' %}">
+                    <th
+                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
+                        {{ agent.user.first_name }}
+                    </th>
+                    <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                        {{ agent.user.last_name }}
+                    </td>
+                    <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        {{agent.user.username}}
+                    </td>
+                    <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        <a href="{% url 'agents:agent_details' agent.pk %}"
+                            class="hover:underline text-blue-600 font-bold "><button> View Details
+                            </button></a>
+                    </td>
+
+                </tr>
+
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+    {% else %}
+    <div class="text-center">
+        <p>No agents available</p>
+    </div>
+
+    {% endif %}
 </div>
 {% endblock %}
