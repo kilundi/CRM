@@ -13,6 +13,10 @@
 {% block content %}
 
 <section class=" body-font w-full min-h-96 ">
+
+    <div class="flex justify-around items-center p-4 mb-3 flex-wrap gap-4 bg-slate-300 w-full bg-opacity-60">
+        <a href="{% url 'leads:category_create' %}">Create Category</a>
+    </div>
     <div class="container px-5 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
             <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Categories</h1>
@@ -26,6 +30,9 @@
                             Name</th>
                         <th class="px-4 py-3 title-font tracking-wider  text-sm">
                             Lead Count
+                        </th>
+                        <th class="px-4 py-3 title-font tracking-wider  text-sm">
+                            Update
                         </th>
 
                     </tr>
@@ -45,6 +52,16 @@
                             <a href="{% url 'leads:category_detail' category.pk %}">{{ category.name }}</a>
                         </td>
                         <td class="px-4 py-3">{{ category.leads.count }}</td>
+                        <td class="px-4 py-3">
+                            <a href="{% url 'leads:category_update' category.pk %}"
+                                class="text-blue-600 underline">Edit</a>
+                        </td>
+                        <td class="px-4 py-3">
+                            <a href="{% url 'leads:category_delete' category.pk %}"
+                                class="text-red-600 underline">Delete</a>
+                        </td>
+
+
                     </tr>
                     {% endfor %}
 

@@ -1,0 +1,39 @@
+{% extends 'leads/base.html' %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/leadCard.css' %}">
+
+{% endblock %}
+
+
+{% block title %}Delete Lead {% endblock %}
+
+{% block content %}
+
+
+<div class="flex flex-col gap-4 items-center justify-center p-16 w-full max-h-full">
+
+
+    <h1 class="text-4xl text-red-600"> ARE YOU SURE YOU WANT TO DELETE THIS CATEGORY?</h1>
+    <p> <span class="font-bold">{{ category.name }} </span> </p>
+
+
+    <div class="flex gap-4 justify-center items-center">
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+
+                <button class=" bg-red-500 text-SECONDARY1 rounded-xl font-extrabold uppercase py-3 px-4 text-sm "
+                    type="submit">Delete</button>
+            </form>
+        </div>
+        <div>
+            <a class="text-xl font-bold " href="{% url 'leads:category_list' %}">Go back to Categories</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

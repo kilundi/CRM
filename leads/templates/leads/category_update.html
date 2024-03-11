@@ -1,0 +1,36 @@
+{% extends 'leads/base.html' %}
+
+{% load tailwind_filters %}
+
+{% load static %}
+
+{% block css %}
+
+
+{% endblock %}
+
+
+{% block title %}Update Category {% endblock %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center p-16 w-full max-h-full">
+    <a href="{% url 'leads:category_list' %}">Go back to Categories</a>
+
+
+
+    <div class="flex flex-col items-center justify-center max-h-full dark w-full">
+        <div class="w-full max-w-md bg-formColor rounded-lg p-6 shadow-[inset_-12px_-8px_40px_#46464620]">
+            <h2 class="text-2xl font-bold mb-4 text-center">Update Category</h2>
+            <form class="flex flex-col gap-3" method="post">
+                {% csrf_token %}
+
+                {{ form|crispy }}
+
+                <button class="text-xl font-bold" type="submit">Update</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
