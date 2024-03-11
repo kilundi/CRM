@@ -23,9 +23,9 @@ class Lead(models.Model):
     organization = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey("Category", related_name="leads", null=True, blank=True, on_delete=models.SET_NULL)
-    description = models.TextField()
+    description = models.TextField(max_length=255, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField()
     email = models.EmailField()
 
 

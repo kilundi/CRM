@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<div class=" w-full min-h-96 flex flex-col justify-center items-center">
+<div class=" w-full min-h-96 flex flex-col justify-center items-center self-start ">
     <div class="w-full text-center">
         <h1 class="text-4xl font-header">Leads</h1>
     </div>
@@ -126,13 +126,15 @@
                             </td>
                             <td
                                 class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                <a href="  {% url 'leads:assign_agent' lead.pk %} ">
-                                    <span
-                                        class="bg-red-600  p-1 px-2 rounded-md text-white hover:bg-red-300 hover:text-black font-bold">
-                                        Assign an Agent
-                                    </span>
+                                <div class="animate-bounce">
+                                    <a href="  {% url 'leads:assign_agent' lead.pk %} ">
+                                        <span
+                                            class=" bg-red-600  p-1 px-2 rounded-md text-white hover:bg-green-300 hover:text-black font-bold animate-bounce">
+                                            Assign an Agent
+                                        </span>
 
-                                </a>
+                                    </a>
+                                </div>
                             </td>
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
