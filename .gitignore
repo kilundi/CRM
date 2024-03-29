@@ -138,4 +138,5 @@ dmypy.json
 cython_debug/
 
 static_root
+staticfiles
 media_root

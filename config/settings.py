@@ -1,6 +1,8 @@
 
 import os
 from pathlib import Path
+import dj_database_url
+
 
 
 import environ
@@ -11,10 +13,10 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-READ_DOT_ENV_FILE = env('READ_DOT_ENV_FILE', default=False)
+# READ_DOT_ENV_FILE = env('READ_DOT_ENV_FILE', default=False)
 
-if READ_DOT_ENV_FILE:
-    environ.Env.read_env()
+# if READ_DOT_ENV_FILE:
+environ.Env.read_env()
 
 #To run use $env:READ_DOT_ENV_FILE = "True"
 
@@ -30,12 +32,14 @@ SECRET_KEY=env('SECRET_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+
     "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +56,9 @@ INSTALLED_APPS = [
 
     "crispy_forms",
     "crispy_tailwind",
+
+    # amazon s3
+    'storages',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -98,15 +105,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
+# }
+
+DATABASE_URL = env('DATABASE_URL')
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
+    "default":dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
 
 
@@ -150,7 +164,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-STATIC_ROOT = 'static_root'
+STATIC_ROOT = BASE_DIR /'staticfiles'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -166,13 +180,43 @@ LOGIN_URL = '/login'
 LOGOUT_REDIRECT_URL='/'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_HOST = 'your-smtp-host'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'your-email@example.com'
-# EMAIL_HOST_PASSWORD = 'your-email-password'
+
+JAZZMIN_SETTINGS ={
+    'site_header': "Ecommerce",
+    'site_brand': 'You order, we deliver',
+    # 'site_logo': '/images/logo.jpg',
+    'copyright': 'ecommerce.com',
+}
+
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# # EMAIL_HOST = 'your-smtp-host'
+# # EMAIL_PORT = 587
+# # EMAIL_USE_TLS = True
+# # EMAIL_HOST_USER = 'your-email@example.com'
+# # EMAIL_HOST_PASSWORD = 'your-email-password'
+
+
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
+STATICFILES_STORAGE = env('STATICFILES_STORAGE')
+AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
+# AWS_S3_CUSTOM_DOMAIN = env('AWS_S3_CUSTOM_DOMAIN')
+
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
