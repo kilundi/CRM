@@ -25,6 +25,13 @@
                         {% if request.user.is_organizor %}
                         <a href="{% url 'agents:agents_list' %}"
                             class="block w-full py-2 px-4 text-sm hover:bg-gray-200">Agents</a>
+
+                        <a href="{% url 'leads:category_list' %}"
+                            class="block w-full py-2 px-4 text-sm hover:bg-gray-200">
+                            Categories
+                        </a>
+
+
                         {% endif %}
                         {% endif %}
 
@@ -96,25 +103,24 @@
 
                         </div>
                     </a>
-
-                    <a href="{% url 'leads:lead_create' %}" class="block w-full  text-sm ">
+                    {% if request.user.is_organizor %}
+                    <a href="{% url 'leads:category_list' %}" class="block w-full  text-sm ">
                         <div
                             class="flex   bg-slate-300 p-3 cursor-pointer rounded-xl justify-start items-center hover:text-SECONDARY1 hover:bg-slate-500 font-bold">
-                            Create
-                            Lead
+                            Categories
 
                         </div>
                     </a>
+
 
                     <a href="{% url 'agents:agents_list' %}" class="block w-full  text-sm ">
                         <div
                             class="flex   bg-slate-300 p-3 cursor-pointer rounded-xl justify-start items-center hover:text-SECONDARY1 hover:bg-slate-500 font-bold">
-                            agent
-                            list
+                            Agents
 
                         </div>
                     </a>
-
+                    {% endif %}
                 </div>
 
                 <div class=" md:flex  space-x-1 w-full flex flex-col justify-center items-center gap-2">
@@ -124,17 +130,15 @@
                         Hi {{ request.user.username }} !
                     </div>
 
-                    <a href="{% url 'logout'%}" class=" text-sm w-full ">
-                        <div
-                            class="flex   bg-slate-300 p-3 cursor-pointer rounded-xl justify-start items-center hover:text-SECONDARY1 hover:bg-slate-500">
+                    <div
+                        class="flex w-full  bg-slate-300 p-3 cursor-pointer rounded-xl justify-start items-center hover:text-SECONDARY1 hover:bg-slate-500">
 
-                            <form method="post" action="{% url 'logged_out' %}">
-                                {% csrf_token %}
+                        <form method="post" action="{% url 'logged_out' %}">
+                            {% csrf_token %}
 
-                                <button class=" font-bold" type="submit">Logout</button>
-                            </form>
-                        </div>
-                    </a>
+                            <button class=" font-bold" type="submit">Logout</button>
+                        </form>
+                    </div>
                 </div>
                 {% else %}
                 <div class="flex gap-4 w-full bg-slate-300 p-3 cursor-pointer rounded-xl justify-center items-center">

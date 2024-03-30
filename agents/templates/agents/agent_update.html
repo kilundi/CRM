@@ -15,10 +15,10 @@
 {% block content %}
 
 
-<div class="flex flex-col items-center justify-center p-16 w-full max-h-full">
-    <a href="{% url 'agents:agents_list' %}">Go back to agent_list</a>
+<div class="flex flex-col items-center justify-center md:p-16 w-full max-h-full">
+    <a class="text-blue-600 underline" href="{% url 'agents:agents_list' %}">Go back to agents</a>
 
-    <h1>{{ agent.user }} update</h1>
+    <h1 class="mt-4">{{ agent.user }} update</h1>
 
 
     <div class="flex flex-col items-center justify-center max-h-full dark w-full ">
