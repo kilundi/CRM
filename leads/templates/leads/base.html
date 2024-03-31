@@ -19,9 +19,11 @@
 
     <title>{% block title %} {% endblock %} | CRM </title>
 </head>
+
 <body class="bg-DARK_THEME-PRIMARY font-body dark:bg-DARK_THEME-SECONDARY dark:text-LIGHT_MODE">
     <section
-        class="max-w-6xl mx-auto border-gray-500 border-r border-l border-opacity-50 min-h-screen bg-animated-bg shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] ">
+        class="max-w-6xl mx-auto border-gray-500 border-r border-l border-opacity-50 min-h-screen shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] "
+        style="background-image: url('https://crmbucketproject.s3.eu-north-1.amazonaws.com/images/bg7.svg');">
         {% block header %}
         {% include 'navbar.html' %}
         {% endblock %}
