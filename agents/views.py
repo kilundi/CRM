@@ -43,7 +43,7 @@ class AgentCreateView(OrganizorAndLoginRequiredMixin, generic.CreateView):
         send_mail(
             subject='You are invited to be an agent',
             message = (
-                f'You were added as an agent on COSSIM LIMITED. '
+                f'You were added as an agent on <MY ORGANIZATION>. '
                 f'Please login <a href="https://crm-wtb4.onrender.com/login/">here</a> to your account. '
                 f'<p>Your username is <strong>{user.username}</strong> </p> '
                 f'Reset your password using this email <p>{user.email}</p>'
